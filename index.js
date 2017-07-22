@@ -8,7 +8,8 @@ paper.setup('myCanvas');
 view.viewSize.set(800, 500)
 
 const DATA_MAX = 255
-const CELL_SIZE = 50
+const CELL_SIZE = 30
+const SCALE = 1
 const ROW = Math.floor(view.size.width / CELL_SIZE)
 const COLUMN = Math.floor(view.size.height / CELL_SIZE)
 
@@ -32,7 +33,7 @@ function draw(drawingData, x, y, size) {
     }
     finger.addChild(path)
   }
-  finger.scale(0.8)
+  finger.scale(SCALE)
   fingers.push(finger)
 }
 
@@ -59,7 +60,7 @@ function getAngleDeg(pointA, pointB) {
 view.onMouseMove = function(event) {
   for (let i = 0; i < fingers.length; i++) {
     const finger = fingers[i]
-    const angle = getAngleDeg(finger.position, event.point) + 90
+    const angle = getAngleDeg(finger.position, event.point) - 90
     const lastAngle = finger.rotation
     finger.rotate(angle - lastAngle)
   }
